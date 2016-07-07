@@ -1,0 +1,17 @@
+1466294554731	Delete element
+1466296760358	Rename field 'logNome'
+1466296778361	Rename field 'logUsuario'
+1466296805371	Rename field 'lognome'
+1466385055731	Delete elements
+1466512642086	Extract local variable 'vkV'
+1466512718820	Extract local variable 'vkR'
+1466514019495	Rename package 'experiencia'
+1466514982223	Rename type 'TelacadastroFornecedores'
+1466515009057	Rename type 'TelacadastroProdutos'
+1466532513374	Rename type 'Logado'
+1466532893228	Rename local variable 'logadoUsuario'
+1466532984297	Rename local variable 'lblLogadoUsuario'
+1466619962686	Delete element
+1466620014353	Rename type 'TelaCadastroUsuario'
+1466620025863	Delete element
+1466620038273	Delete element

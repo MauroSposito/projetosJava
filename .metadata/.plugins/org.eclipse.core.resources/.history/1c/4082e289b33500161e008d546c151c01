@@ -1,0 +1,21 @@
+package testes;
+
+
+import br.com.MauroJava.ValidacaoUtil.*;
+
+public class TesteData{
+
+	public static void main(String[] args) {
+	
+		System.out.println(ValidacaoUtil.agora());
+
+		
+	}
+	
+	
+
+
+	
+
+}
+

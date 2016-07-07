@@ -1,0 +1,55 @@
+package testes;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+
+public class principal {
+
+	public static void main(String[] args) {
+
+		Scanner ler = new Scanner(System.in);
+		System.out.printf("informe o nome do arquivo texto:\n");
+		String nome = ler.nextLine();
+		System.out.printf("\nConteúdo do arquivo de texto\n");
+		try {
+			FileReader arq = new FileReader(nome);
+			BufferedReader lerArq = new BufferedReader(arq);
+			String linha = lerArq.readLine();
+			linha = lerArq.readLine();
+			
+			while(linha != null){
+				//System.out.printf("%s\n", linha);
+				String inscricao = linha.substring(0,9);
+				String empresa = linha.substring(9,59);
+				String cnpj_cpf = linha.substring(59,73);
+				String homologacao = linha.substring(73,81);
+				String cnae = linha.substring(81,88);
+				String municipio = linha.substring(88,183);
+				
+				System.out.println(inscricao);
+				System.out.println(empresa);
+				System.out.println(cnpj_cpf);
+				System.out.println(homologacao);
+				System.out.println(cnae);
+				System.out.println(municipio);
+				
+						
+				
+				linha = lerArq.readLine();
+				
+			}
+			arq.close();		
+		} catch (IOException e) {
+			System.err.printf("erro na abertura do arquivo: %s.\n", e.getMessage());
+			
+		}
+		System.out.println();
+		ler.close();
+	}
+		
+	
+}

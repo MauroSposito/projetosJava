@@ -1,0 +1,17 @@
+package testes;
+
+import java.util.Scanner;
+import java.io.FileReader;
+public class LerArquivoSefaz {
+
+	public static void main(String[] args) {
+		String caminho = "C:\Users\mauro\Desktop\H01.txt";
+		
+		Scanner in = new Scanner(new FileReader(caminho));
+		
+		in.close();
+		
+
+	}
+
+}

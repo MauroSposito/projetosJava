@@ -1,0 +1,28 @@
+package testes;
+
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
+
+
+public class TesteData{
+
+	public static void main(String[] args) {
+		LocalDateTime agora = LocalDateTime.now();
+		DateTimeFormatter formatador = DateTimeFormatter
+		  .ofLocalizedDateTime(FormatStyle.SHORT)
+		  .withLocale(new Locale("pt", "br"));
+		agora.format(formatador); //08/04/14 10:02
+
+		
+	}
+	
+	
+
+
+	
+
+}
+

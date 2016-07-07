@@ -1,0 +1,304 @@
+package telas;
+
+import javax.swing.ImageIcon;
+
+//import java.awt.EventQueue;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+
+import java.awt.Cursor;
+import java.awt.Dimension;
+
+import java.sql.*;
+import dal.ModuloConexao;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+
+public class TelaCadastroUsuarios extends JInternalFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel lblIdUser;
+	private JLabel lblCampo;
+	private JTextField txfIdUser;
+	private JLabel lblUsuario;
+	private JTextField txfUsuario;
+	private JLabel lblLogin;
+	private JTextField txfLogin;
+	private JLabel lblFone;
+	private JTextField txfFone;
+	private JLabel lblNivel;
+	private JComboBox<Integer> cbbNivel;
+	private JLabel lblSenha;
+	private JTextField txfSenha;
+	private JButton btnCreate;
+	private JButton btnRead;
+	private JButton btnUpdate;
+	private JButton btnDelete;
+	
+	Connection conexao =  null;//conecta o banco de dados
+	PreparedStatement pst = null;//framework sql. prepara a conexao com banco de dados
+	ResultSet rs = null;//para exibir o resultado das instrucoes sql dentro do java
+	
+
+	/**
+	 * Launch the application.
+	 
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TelaCadastroUsuarios frame = new TelaCadastroUsuarios();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+
+	public TelaCadastroUsuarios() {
+		/*
+		 * cria o Frame Interno.
+		 */
+		setTitle("Cadastro de Usuários");
+		setMaximumSize(new Dimension(795, 526));
+		setPreferredSize(new Dimension(795, 526));
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setBounds(0, 0, 795, 526);
+		getContentPane().setLayout(null);
+		
+		
+	
+		
+		/*
+		 * Cria os campos
+		 */
+		lblIdUser = new JLabel("*Código..:");
+		lblIdUser.setBounds(90, 70, 65, 14);
+		getContentPane().add(lblIdUser);
+		
+		txfIdUser = new JTextField();
+		txfIdUser.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int key = (e.getKeyCode());
+				if (key == 10){
+					consultar();
+				}
+			}
+		});
+		txfIdUser.setBounds(156, 68, 65, 20);
+		getContentPane().add(txfIdUser);
+		
+		lblCampo = new JLabel("*Campos Obrigatórios");
+		lblCampo.setBounds(545, 70, 130, 14);
+		getContentPane().add(lblCampo);
+		
+	
+		lblUsuario = new JLabel("*Usuário:");
+		lblUsuario.setBounds(90, 130, 65, 14);
+		getContentPane().add(lblUsuario);
+		
+		txfUsuario = new JTextField();
+		txfUsuario.setBounds(156, 128, 520, 20);
+		getContentPane().add(txfUsuario);
+		
+		lblLogin = new JLabel("*Login...:");
+		lblLogin.setBounds(90, 190, 65, 14);
+		getContentPane().add(lblLogin);
+		
+		txfLogin = new JTextField();
+		txfLogin.setBounds(156, 188, 200, 20);
+		getContentPane().add(txfLogin);
+		
+		lblFone = new JLabel("Telefone..:");
+		lblFone.setBounds(390,190,200,20);
+		getContentPane().add(lblFone);
+		
+		txfFone = new JTextField();
+		txfFone.setBounds(465, 188, 210, 20);
+		getContentPane().add(txfFone);
+		
+		lblSenha = new JLabel("*Senha...:");
+		lblSenha.setBounds(90, 250, 65, 14);
+		getContentPane().add(lblSenha);
+		
+		txfSenha = new JTextField();
+		txfSenha.setBounds(156, 248, 200, 20);
+		getContentPane().add(txfSenha);
+		
+		lblNivel = new JLabel("*Nível........:");
+		lblNivel.setBounds(390, 250, 65, 14);
+		getContentPane().add(lblNivel);
+		
+		cbbNivel = new JComboBox<Integer>();
+		cbbNivel.setBounds(465, 248, 40, 20);
+		cbbNivel.addItem(0);
+		cbbNivel.addItem(1);
+		getContentPane().add(cbbNivel);
+		
+		btnCreate = new JButton();
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				adicionar();
+			}
+		});
+		
+		btnCreate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCreate.setToolTipText("Adicionar");
+		btnCreate.setPreferredSize(new Dimension(80, 80));
+		btnCreate.setBounds(130, 350, 80, 80);
+		btnCreate.setIcon(new ImageIcon(TelaCadastroUsuarios.class.getResource("/icones/create.png")));
+		getContentPane().add(btnCreate);
+		
+		btnRead = new JButton();
+		btnRead.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultar();
+				
+			}
+		});
+		
+		btnRead.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnRead.setToolTipText("Procurar");
+		btnRead.setPreferredSize(new Dimension(80,80));
+		btnRead.setBounds(280, 350, 80, 80);
+		btnRead.setIcon(new ImageIcon(TelaCadastroUsuarios.class.getResource("/icones/read.png")));
+		getContentPane().add(btnRead);
+		
+		btnUpdate = new JButton();
+		
+		btnUpdate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnUpdate.setToolTipText("Alterar");
+		btnUpdate.setPreferredSize(new Dimension(80,80));
+		btnUpdate.setBounds(430, 350, 80, 80);
+		btnUpdate.setIcon(new ImageIcon(TelaCadastroUsuarios.class.getResource("/icones/update.png")));
+		getContentPane().add(btnUpdate);
+		
+		btnDelete = new JButton();
+		btnDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDelete.setToolTipText("Apagar");
+		btnDelete.setPreferredSize(new Dimension(80,80));
+		btnDelete.setBounds(580, 350, 80, 80);
+		btnDelete.setIcon(new ImageIcon(TelaCadastroUsuarios.class.getResource("/icones/delete.png")));
+		getContentPane().add(btnDelete);
+		
+		//estabelece a conexao com banco de dados
+		conexao = ModuloConexao.conector();
+	}
+	/*
+	 * metodo para consultar usuarios.	  
+	 */
+	private void consultar(){
+		String sql = "select * from tbusuarios where id_user =?";
+		try {
+			pst = conexao.prepareStatement(sql);
+			pst.setString(1,txfIdUser.getText());
+			rs = pst.executeQuery();
+			
+			if (rs.next()){
+				txfUsuario.setText(rs.getString("usuario"));
+				txfUsuario.setEditable(false);
+				txfLogin.setText(rs.getString("login"));
+				txfLogin.setEditable(false);
+				txfSenha.setText(rs.getString("senha"));
+				txfSenha.setEditable(false);
+				txfFone.setText(rs.getString("fone"));
+				txfFone.setEditable(false);
+				cbbNivel.setSelectedItem(rs.getInt("nivel"));
+				cbbNivel.setEditable(false);
+				
+			} else {
+				txfUsuario.setText(null);
+				txfUsuario.setEditable(true);
+				txfLogin.setText(null);
+				txfLogin.setEditable(true);
+				txfSenha.setText(null);
+				txfSenha.setEditable(true);
+				txfFone.setText(null);
+				txfFone.setEditable(true);
+				cbbNivel.setEditable(true);
+				JOptionPane.showMessageDialog(null,"Usuário não Cadastrado");
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+	/*
+	 * metodo para adicionar usuarios.
+	 */
+	private void adicionar(){
+		if (txfIdUser.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Código vazio, preencha!");
+		} else {
+			/*
+			String sql = "select * from tbusuarios where id_user =?";
+			try {
+				pst = conexao.prepareStatement(sql);
+				pst.setString(1,txfIdUser.getText());
+				rs = pst.executeQuery();
+				
+				if (rs.next()){
+					JOptionPane.showMessageDialog(null,"Usuário Cadastrado!");
+					
+				
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			}
+		*/
+			String sql = "insert into tbusuarios (id_user,usuario,login,senha,fone,nivel,cadastro_por) values (?,?,?,?,?,?,?)";
+			try {
+				pst = conexao.prepareStatement(sql);
+				pst.setString(1,txfIdUser.getText());
+				pst.setString(2,txfUsuario.getText());
+				pst.setString(3,txfLogin.getText());
+				pst.setString(4,txfSenha.getText());
+				pst.setString(5,txfFone.getText());
+				Integer caixa = Integer.parseInt((String) cbbNivel.getSelectedItem());
+				System.out.println(caixa);
+				//pst.setInt(6,caixa);
+				pst.setString(7, Perfil.getLogUsuario());
+				
+				//estrutura abaixo verifica se os campos obrigatorios nao  estao vazios
+				if (txfUsuario.getText().isEmpty() || txfLogin.getText().isEmpty() || txfSenha.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+				} else {
+	
+					// a estrutura abaixo é usada para confirmar a inserção dos dados na tabeala.
+					int adicionado = pst.executeUpdate();// adiciona o usuario na tabela sql atribui um valor a variavel
+					if (adicionado > 0){
+						JOptionPane.showMessageDialog(null, "Usuário adicionado com sucesso!");
+						txfIdUser.setText(null);
+						txfUsuario.setText(null);
+						txfLogin.setText(null);
+						txfSenha.setText(null);
+						txfFone.setText(null);
+						
+					}
+				}
+			
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
+			}
+		}
+	
+	}
+}

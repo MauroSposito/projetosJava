@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;sair&apos; in &apos;telas.TelaCadastroUsuarios.alterar()&apos; to &apos;confirma&apos;&#x0D;&#x0A;- Original project: &apos;Util&apos;&#x0D;&#x0A;- Original element: &apos;telas.TelaCadastroUsuarios.alterar().sair&apos;&#x0D;&#x0A;- Renamed element: &apos;sair&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;sair&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;telas{TelaCadastroUsuarios.java[TelaCadastroUsuarios~alterar@sair!10510!10621!10514!10517!I!0!false" name="confirma" references="true" stamp="1467483518596" version="1.0"/>
+</session>

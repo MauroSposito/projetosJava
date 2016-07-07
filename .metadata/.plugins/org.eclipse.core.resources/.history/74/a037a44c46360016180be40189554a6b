@@ -1,0 +1,158 @@
+package experiencia;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.AbstractButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import br.com.MauroJava.ValidacaoUtil.ValidacaoUtil;
+
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
+
+import java.util.Date;
+import java.util.Locale;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+
+public class TelaPrincipal extends JFrame implements ActionListener{
+
+	private JLabel lblHorario3 = new JLabel();
+	private javax.swing.Timer timer; 
+	private JPanel contentPane;
+	private JMenuBar menuBar;
+	private JMenu mnCadastro;
+	private JMenuItem mntmUsurios;
+	private JMenuItem mntmFornecedores;
+	private JMenuItem mntmProdutos;
+	private JMenu mnVendas;
+	private JMenu mnReltorios;
+	private JMenu mnAjuda;
+	private JMenu mnSair;
+	private JLabel lblStatusBar;
+	private JSeparator separator;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TelaPrincipal frame = new TelaPrincipal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	
+	/**
+	 * Create the frame.
+	 */
+	public TelaPrincipal() {
+		setResizable(false);
+		setTitle("Sistema");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 800, 600);
+		//centraliza o JFrame.
+		setLocationRelativeTo(null);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnCadastro = new JMenu("Cadastro");
+		menuBar.add(mnCadastro);
+		
+		mntmUsurios = new JMenuItem("Usuários");
+		mnCadastro.add(mntmUsurios);
+		
+		mntmFornecedores = new JMenuItem("Fornecedores");
+		mnCadastro.add(mntmFornecedores);
+		
+		mntmProdutos = new JMenuItem("Produtos");
+		mnCadastro.add(mntmProdutos);
+		
+		mnVendas = new JMenu("Vendas");
+		menuBar.add(mnVendas);
+		
+		mnReltorios = new JMenu("Relátorios");
+		menuBar.add(mnReltorios);
+		
+		mnAjuda = new JMenu("Ajuda");
+		menuBar.add(mnAjuda);
+		
+		mnSair = new JMenu("Sair");
+		mnSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.exit(0);
+			}
+		});
+		menuBar.add(mnSair);
+
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		separator = new JSeparator();
+		separator.setBounds(0, 545, 800, 1);
+		contentPane.add(separator);
+		
+		separator = new JSeparator();
+		separator.setBounds(0, 530, 800, 1);
+		contentPane.add(separator);
+		
+		JLabel lblBarraStatus = new JLabel("Usuário:");
+		lblBarraStatus.setBounds(26, 530, 80, 14);
+		contentPane.add(lblBarraStatus);
+		
+		
+		String logadoUsuario = Logado.getLogUsuario();
+		JLabel lblLogadoUsuario = new JLabel(logadoUsuario);
+		lblLogadoUsuario.setBounds(80, 530, 200, 14);
+		contentPane.add(lblLogadoUsuario);
+		
+		String LogadoData = ValidacaoUtil.hoje();
+		JLabel lblLogadoData = new JLabel(LogadoData);
+		lblLogadoData.setBounds(480,530,70,14);
+		contentPane.add(lblLogadoData);
+		
+		JLabel lblHorario = new JLabel("Horário:");
+		lblHorario.setBounds(646, 530, 46, 14);
+		contentPane.add(lblHorario);
+				
+		contentPane.add(lblHorario3);
+		disparaRelogio();
+	}	
+	
+	
+	public void disparaRelogio(){
+		if (timer == null) {   
+			timer = new javax.swing.Timer(1000,this);   
+			timer.setInitialDelay(0);   
+			timer.start();   
+		} else if (!timer.isRunning()) {   
+			timer.restart();   
+		}
+	}
+	public void actionPerformed(ActionEvent ae) {
+		Date hora = new Date(); 
+		SimpleDateFormat hora_formato = new SimpleDateFormat("HH:mm:ss"); 
+		lblHorario3.setBounds(700, 530, 70, 14);
+		lblHorario3.setText(hora_formato.format(hora));
+	}
+	
+}

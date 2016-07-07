@@ -1,0 +1,62 @@
+package experiencia;
+
+public class Logado {
+	
+	//atributos
+	private int idUser;
+	private String logUsuario;
+	private String logSenha;
+	private String logLogin;
+	private int logNivel;
+	private String logEntrada;
+	private String logSaida;
+	
+	//getters e setters
+	public int getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+	public String getLogNome() {
+		return logUsuario;
+	}
+	public void setLogNome(String logNome) {
+		this.logUsuario = logNome;
+	}
+	public String getLogSenha() {
+		return logSenha;
+	}
+	public void setLogSenha(String logSenha) {
+		this.logSenha = logSenha;
+	}
+	public String getLogUsuario() {
+		return logLogin;
+	}
+	public void setLogUsuario(String logUsuario) {
+		this.logLogin = logUsuario;
+	}
+	public int getLogNivel() {
+		return logNivel;
+	}
+	public void setLogNivel(int logNivel) {
+		this.logNivel = logNivel;
+	}
+	public String getLogEntrada() {
+		return logEntrada;
+	}
+	public void setLogEntrada(String logEntrada) {
+		this.logEntrada = logEntrada;
+	}
+	public String getLogSaida() {
+		return logSaida;
+	}
+	public void setLogSaida(String logSaida) {
+		this.logSaida = logSaida;
+	}
+	
+			
+	
+	
+	
+}
