@@ -19,8 +19,8 @@ import java.io.InputStream;
 public abstract class ValidacaoUtil {
 
 
-	/*
-	 * Metodo validaCpf(String cpf) retorna verdadeiro ou falso alem de verificar quantidade de caracteres.
+	/*metodo validaCpf
+	 * 
 	 */
 	public static boolean validaCpf(String cpf){
 		if	(cpf.length() != 11 && cpf.length() < 11){
@@ -65,9 +65,8 @@ public abstract class ValidacaoUtil {
 			return false;
 		}
 	}
-	
-	/* 
-	 * Metodo agora() retorna data e hora do momento que for chamada.
+	/* metodo agora()
+	 * 
 	 */
 	public static String agora (){
 		LocalDateTime now = LocalDateTime.now();
@@ -75,8 +74,8 @@ public abstract class ValidacaoUtil {
 		return (now.format(formatador));
 	}
 	
-	/*
-	 * Metodo hoje(), retorna data no formatado na mascara dd/MM/yyyy
+	/*metodo hoje()
+	 * 
 	 */
 	public static String hoje(){
 		LocalDate today = LocalDate.now();
@@ -84,8 +83,9 @@ public abstract class ValidacaoUtil {
 		return (today.format(formatador)); 
 	}
 	
-		/* 
-		 * Metodo idMaquina() para retornar id da cpu windows ou serial hd Linux
+		/*metodo para pegar id da cpu windows 
+		 * ou serial hd Linux
+		 * 
 		 */
 	public static String idMaquina(){
 		Properties propriedades = System.getProperties();
