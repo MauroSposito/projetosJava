@@ -4,7 +4,9 @@ package br.com.MauroJava.ValidacaoUtil;
 
 public class Conversoes{
 	
-	
+	/*
+	 * Converte ASCII em Byte Array
+	 */
 	public static byte[] converteASCiiParaByteArray(String s, boolean padding){
 		int tamanho;
 		if (padding){
@@ -26,6 +28,9 @@ public class Conversoes{
 		return arrayResult;
 	}	
 	
+	/*
+	 * Converte Byte Array em HexString
+	 */
 	public static String converteByteArrayParaHexString(byte[] a){
 		char hexDig[] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 		StringBuffer buf = new StringBuffer();
@@ -35,7 +40,9 @@ public class Conversoes{
 		}
 		return buf.toString();
 	}
-	
+	/*
+	 * Converte HexString em Byte Array 
+	 */
 	public static byte[] converteHexStringParaByteArray(String s){
 		int tamanho = s.length() / 2;
 		byte[] arrayResult = new byte[tamanho];
@@ -46,4 +53,23 @@ public class Conversoes{
 		}
 		return arrayResult;
 	}
+	/*
+	 * Converte HexString em String
+	 */
+	public static String converteHexStringParaString (String s){
+		int tamanho = s.length() / 2;
+		byte[] arrayResult = new byte[tamanho];
+		for (int i = 0; i < tamanho; i++){
+			String hex = s.substring(i*2, i*2+2);
+				Integer valor = Integer.parseInt(hex, 16);
+				arrayResult[i] = valor.byteValue();
+		}
+		String string = new String(arrayResult);
+		string = string.trim();
+		return string;
+	}
+
+
 }
+
+

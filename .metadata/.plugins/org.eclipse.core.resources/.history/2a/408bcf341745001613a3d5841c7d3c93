@@ -1,0 +1,54 @@
+package br.com.MauroJava.ValidacaoUtil;
+
+import java.security.Key;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+public class MyAES{
+	
+	private final String ALGORITMO = "AES/CTR/NoPadding";
+	
+	private Key chaveAES;
+	private IvParameterSpec ivps;
+	
+	public MyAES(String key, String iv){
+		byte[] ivArray = Conversoes.converteASCiiParaByteArray(iv, false);
+		ivps = new IvParameterSpec(ivArray);
+		
+		chaveAES = gerarChaveAES(key);
+	}
+	/*  
+	* Metodo para gerar a chave 
+	* java.security.Key
+	*/
+	public static Key gerarChaveAES(String key){
+		byte[] keyArray = Conversoes.converteHexStringParaByteArray(key);
+		return new SecretKeySpec(keyArray,"AES");
+	}
+	
+	/*
+	* texto String em formato hexadecimal do texto a encriptar
+	*/
+	public String encriptar(String texto) throws Exception{
+		Cipher c = Cipher.getInstance(ALGORITMO);
+		c.init(Cipher.ENCRYPT_MODE, chaveAES, ivps);
+		byte[] textoArray = Conversoes.converteHexStringParaByteArray(texto);
+		byte[] msg = c.doFinal(textoArray);
+		return Conversoes.converteByteArrayParaHexString(msg);
+	}
+	/*
+	* textoCifrado String em formato hexadecimal do texto encriptado
+	*/
+	public String desencriptar(String textoCifrado) throws Exception{
+		Cipher c = Cipher.getInstance(ALGORITMO);
+		c.init(Cipher.DECRYPT_MODE, chaveAES, ivps);
+		byte[] textoArray = Conversoes.converteHexStringParaByteArray(textoCifrado);
+		byte[] msg = c.doFinal(textoArray);
+		String mauro = new String(msg);
+		mauro = mauro.substring(0, mauro.length()/2);
+		System.out.println(mauro.length());
+		return Conversoes.converteByteArrayParaHexString(msg);
+	}
+}
+

@@ -8,14 +8,12 @@ import javax.crypto.spec.SecretKeySpec;
 public class MyAES{
 	
 	private final String ALGORITMO = "AES/CTR/NoPadding";
-	
 	private Key chaveAES;
 	private IvParameterSpec ivps;
 	
 	public MyAES(String key, String iv){
 		byte[] ivArray = Conversoes.converteASCiiParaByteArray(iv, false);
 		ivps = new IvParameterSpec(ivArray);
-		
 		chaveAES = gerarChaveAES(key);
 	}
 	/*  
@@ -26,7 +24,6 @@ public class MyAES{
 		byte[] keyArray = Conversoes.converteHexStringParaByteArray(key);
 		return new SecretKeySpec(keyArray,"AES");
 	}
-	
 	/*
 	* texto String em formato hexadecimal do texto a encriptar
 	*/
