@@ -8,14 +8,15 @@ public class ExemploAES{
 		
 		String iv = "1234567890123456";
 		
-		String texto = "Mauro gatinho";
+		String texto = "Em Criptografia, o Advance Encryption Standard (AES, ou Padrão de Critografia Avançado, em português) também o AES já é um dos algoritmos mais populares usados para criptografia simétrica";
 		
 		System.out.println("Texto Original");
 		System.out.println(texto);
 		
 		System.out.println("Texto em hexa");
-		
-		String textoEmHexa = Conversoes.converteByteArrayParaHexString(Conversoes.converteASCiiParaByteArray(texto, true));
+		byte[] teste = Conversoes.converteASCiiParaByteArray(texto, true);
+		System.out.println("==>"+teste);
+		String textoEmHexa = Conversoes.converteByteArrayParaHexString(teste);
 		
 		System.out.println(textoEmHexa);
 		
