@@ -1,0 +1,17 @@
+package testes;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+public class LerIni {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		
+		Properties arqIni = new Properties();
+		arqIni.load(new FileInputStream("c:\\Users\\mauro\\conf.ini"));
+		String texto=arqIni.getProperty("");
+		System.out.println(texto);
+	}
+}

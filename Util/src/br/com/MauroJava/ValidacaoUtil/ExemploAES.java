@@ -17,7 +17,7 @@ public class ExemploAES{
 		/*
 		 * Texto a ser criptografado
 		 */
-		String texto = "história do esporte contra a seleção brasileira.";
+		String texto = ValidacaoUtil.idMaquina();
 		
 		/*
 		 * Converte o texto em ByteArray e depois

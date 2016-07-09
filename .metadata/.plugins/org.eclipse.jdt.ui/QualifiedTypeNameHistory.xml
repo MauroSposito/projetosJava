@@ -18,7 +18,6 @@
 <fullyQualifiedTypeName name="java.util.Locale"/>
 <fullyQualifiedTypeName name="java.time.LocalDate"/>
 <fullyQualifiedTypeName name="javax.swing.JTextField"/>
-<fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.ValidacaoUtil"/>
 <fullyQualifiedTypeName name="com.sun.glass.events.KeyEvent"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyAdapter"/>
 <fullyQualifiedTypeName name="experiencia.Logado"/>
@@ -40,4 +39,7 @@
 <fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.Conversoes"/>
+<fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.ValidacaoUtil"/>
 </qualifiedTypeNameHistroy>

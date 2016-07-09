@@ -11,6 +11,9 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import br.com.MauroJava.ValidacaoUtil.Conversoes;
+import br.com.MauroJava.ValidacaoUtil.MyAES;
 import br.com.MauroJava.ValidacaoUtil.ValidacaoUtil;
 
 import java.awt.Color;
@@ -19,9 +22,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 //import para conectar bando de dados
 import java.sql.*;
+import java.util.Properties;
+
 import dal.ModuloConexao;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
 import java.awt.event.KeyAdapter;
 
 public class TelaLogin extends JFrame {
@@ -49,23 +55,35 @@ public class TelaLogin extends JFrame {
 	/**
 	 * Executa a aplicação.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaLogin frame = new TelaLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+	public static void main(String[] args) throws Exception {
+		
+		Properties arqIni = new Properties();
+		arqIni.load(new FileInputStream("c:\\Users\\mauro\\conf.ini"));
+		MyAES aes = new MyAES(arqIni.getProperty("tombol"),arqIni.getProperty("vektor"));
+		
+		if (Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("maquina"))).equals(ValidacaoUtil.idMaquina())){
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						TelaLogin frame = new TelaLogin();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+		}else{
+			JOptionPane.showMessageDialog(null, "Cópia não autorizada.");
+			System.exit(0);
+		}
 	}
 
 	/**
 	 * Cria o frame.
+	 * @throws Exception 
 	 */
-	public TelaLogin() {
+	public TelaLogin() throws Exception {
 		//frame
 		setResizable(false);
 		setTitle("Bem Vindo");

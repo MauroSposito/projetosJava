@@ -9,7 +9,7 @@ import java.time.format.FormatStyle;
 
 import java.util.Locale;
 import java.util.Properties;
-
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -159,4 +159,6 @@ public abstract class ValidacaoUtil {
 		}
 		return "Not found";
 	}
+	
+	
 }

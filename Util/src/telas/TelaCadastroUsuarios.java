@@ -88,7 +88,12 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 			public void keyPressed(KeyEvent e) {
 				int key = (e.getKeyCode());
 				if (key == 10) {
-					consultar();
+					try {
+						consultar();
+					} catch (Exception e1) {
+						
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -144,7 +149,12 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		btnCreate = new JButton();
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				adicionar();
+				try {
+					adicionar();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 			}
 		});
 
@@ -158,7 +168,12 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		btnRead = new JButton();
 		btnRead.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				consultar();
+				try {
+					consultar();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -173,7 +188,12 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		btnUpdate = new JButton();
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				alterar();
+				try {
+					alterar();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -188,8 +208,18 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		btnDelete = new JButton();
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				consultar();
-				remover();
+				try {
+					consultar();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					remover();
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -206,7 +236,7 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 	/*
 	 * metodo para consultar usuarios.
 	 */
-	private void consultar() {
+	private void consultar() throws Exception {
 		// estabelece a conexao com banco de dados
 		conexao = ModuloConexao.conector();
 
@@ -244,7 +274,7 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 	/*
 	 * metodo para adicionar usuarios.
 	 */
-	private void adicionar() {
+	private void adicionar() throws Exception {
 		// estabelece a conexao com banco de dados
 		conexao = ModuloConexao.conector();
 
@@ -311,7 +341,7 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 
 	}
 
-	private void alterar() {
+	private void alterar() throws Exception {
 		// estabelece a conexao com banco de dados
 		conexao = ModuloConexao.conector();
 		if (txfIdUser.getText().isEmpty()) {
@@ -373,7 +403,7 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		}
 	}
 	
-	private void remover(){
+	private void remover() throws Exception{
 		if (txfIdUser.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira Código");
 		} else {

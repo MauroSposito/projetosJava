@@ -1,24 +1,36 @@
 package dal;
 
+import java.io.FileInputStream;
 //importa biblioteca java sql.
 import java.sql.*;
+import java.util.Properties;
+
+import br.com.MauroJava.ValidacaoUtil.Conversoes;
+import br.com.MauroJava.ValidacaoUtil.MyAES;
 
 
 public class ModuloConexao {
 	
 	// metodo responsavel por estabelcer a conexao com o banco de dados.
-	public static Connection conector(){
+	public static Connection conector() throws Exception{
+		
+		//Estancia para ler arquivo INI
+		Properties arqIni = new Properties();
+		arqIni.load(new FileInputStream("c:\\Users\\mauro\\conf.ini"));
+		
+		//Estancia para desencriptar 
+		MyAES aes = new MyAES(arqIni.getProperty("tombol"),arqIni.getProperty("vektor"));
 		
 		//cria uma variavel chamada conexao nula.
 		java.sql.Connection conexao = null;
 		
 		//armazena em variavel para "chamar" o driver importado para biblioteca.
-		String driver = "com.mysql.jdbc.Driver";
+		String driver = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("driver")));
 		
 		//armazenando informaçoes referente ao banco de dados.
-		String url = "jdbc:mysql://localhost:3306/dbprincipal?useSSL=true";
-		String user = "root";
-		String password = "mshigh001";
+		String url = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("url")));
+		String user = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("user")));
+		String password = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("password")));
 		
 		//estabelecendo a conexao com o banco de dados.
 		try {
