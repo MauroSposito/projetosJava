@@ -1,34 +1,37 @@
 package telas;
 
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
-
-import br.com.MauroJava.ValidacaoUtil.Conversoes;
-import br.com.MauroJava.ValidacaoUtil.MyAES;
-import br.com.MauroJava.ValidacaoUtil.ValidacaoUtil;
-
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
 //import para conectar bando de dados
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
-import dal.ModuloConexao;
 import javax.swing.ImageIcon;
-import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.awt.event.KeyAdapter;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import br.com.MauroJava.ValidacaoUtil.Converter;
+import br.com.MauroJava.ValidacaoUtil.MyAES;
+import br.com.MauroJava.ValidacaoUtil.ValidacaoUtil;
+import dal.ModuloConexao;
 
 public class TelaLogin extends JFrame {
 	/*
@@ -57,11 +60,20 @@ public class TelaLogin extends JFrame {
 	 */
 	public static void main(String[] args) throws Exception {
 		
+		//verifica se o arquivo INI existe
+		File arquivo = new File("c:\\Users\\mauro\\conf.ini");
+		if (!arquivo.exists()){
+			JOptionPane.showMessageDialog(null, "Arquivo conf.ini não existe, verifique.");
+			System.exit(0);
+		}
+		
+		//carrega o arquivo INI
 		Properties arqIni = new Properties();
 		arqIni.load(new FileInputStream("c:\\Users\\mauro\\conf.ini"));
+		
 		MyAES aes = new MyAES(arqIni.getProperty("tombol"),arqIni.getProperty("vektor"));
 		
-		if (Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("maquina"))).equals(ValidacaoUtil.idMaquina())){
+		if (Converter.HexStringParaString(aes.desencriptar(arqIni.getProperty("maquina"))).equals(ValidacaoUtil.idMaquina())){
 			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {

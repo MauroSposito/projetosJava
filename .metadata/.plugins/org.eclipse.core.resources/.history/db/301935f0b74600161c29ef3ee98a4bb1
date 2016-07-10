@@ -1,0 +1,52 @@
+package dal;
+
+import java.io.FileInputStream;
+//importa biblioteca java sql.
+import java.sql.*;
+import java.util.Properties;
+
+import br.com.MauroJava.ValidacaoUtil.Converter;
+import br.com.MauroJava.ValidacaoUtil.MyAES;
+
+
+public class ModuloConexao {
+	
+	// metodo responsavel por estabelcer a conexao com o banco de dados.
+	public static Connection conector() throws Exception{
+		
+		//Estancia para ler arquivo INI
+		Properties arqIni = new Properties();
+		arqIni.load(new FileInputStream("c:\\Users\\mauro\\conf.ini"));
+		
+		//Estancia para desencriptar 
+		MyAES aes = new MyAES(arqIni.getProperty("tombol"),arqIni.getProperty("vektor"));
+		
+		//cria uma variavel chamada conexao nula.
+		java.sql.Connection conexao = null;
+		
+		//armazena em variavel para "chamar" o driver importado para biblioteca.
+		String driver = Converter.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("driver")));
+		
+		//armazenando informaçoes referente ao banco de dados.
+		String url = Converter.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("url")));
+		String user = Converter.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("user")));
+		String password = Converter.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("password")));
+		
+		//estabelecendo a conexao com o banco de dados.
+		try {
+			//executa o arquivo do driver
+			Class.forName(driver);
+			// obtem a conexao utilizando os paramentos informados nas variaveis.
+			conexao = DriverManager.getConnection(url, user, password);
+			// retorna se conexao foi feita com sucesso ou nao.
+			return conexao;
+			
+		} catch (Exception e) {
+			//a linha abaixo serve de apoio para esclarecer o erro quando necessario.
+			// System.out.println(e);
+			return null;
+		}
+		
+		
+	}
+}

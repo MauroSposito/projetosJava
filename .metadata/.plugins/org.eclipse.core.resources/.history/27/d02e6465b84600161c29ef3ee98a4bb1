@@ -1,0 +1,80 @@
+package br.com.MauroJava.ValidacaoUtil;
+
+import javax.swing.JOptionPane;
+
+public class ExemploAES{
+
+	public static void main (String[] args) throws Exception{
+		
+		/*
+		 * chave para criptografia obrigatoriedade de 16 hexadecimal
+		 */
+		String chave1 = "140b41b22a29beb4061bda66b6747e14";
+		
+		/*
+		 * vetor para criptografia tambem obrigatoriamente 16 numeros
+		 */
+		String iv1 = "1234567890123456";
+		
+		/*
+		 * Texto a ser criptografado
+		 */
+		
+		String maquina = ValidacaoUtil.idMaquina();
+		System.out.println(maquina);
+		
+		String chave;
+		do{
+		chave = JOptionPane.showInputDialog(null, "entre com a Chave da AES");
+		System.out.println(chave);
+		}while (chave.length() != 32);
+			
+		
+		String iv = JOptionPane.showInputDialog(null, "entre com o Vetor da AES");
+		System.out.println(iv);
+		String texto = JOptionPane.showInputDialog(null, "entre com o Vetor da AES");
+		System.out.println(texto);
+		
+		
+		/*
+		 * Converte o texto em ByteArray e depois
+		 * converte o ByteArray em HexString 
+		 */
+		String textoEmHexa = Converter.converteByteArrayParaHexString(Converter.ASCiiParaByteArray(texto, true));
+		
+		/*
+		 * Instacia o objeto do tipo MyAES passando como
+		 * parametros a chave e o vetor
+		 */
+		MyAES aes = new MyAES(chave, iv);
+		
+		/*
+		 * uma variavel recebe o texto encriptado
+		 */
+		String textoEncriptado = aes.encriptar(textoEmHexa);
+		
+		/*
+		 * uma variavel recebe o texto desencriptado
+		 */
+		String textoDesencriptado = aes.desencriptar(textoEncriptado);
+		
+		/*
+		 * converte o HexString em String legivel 
+		 */
+		String texto2 = Converter.converteHexStringParaString(textoDesencriptado);
+		
+		/*
+		 * para conferencia
+		 */
+		System.out.println("Texto Original");
+		System.out.println(texto);
+		System.out.println("Texto em hexa");
+		System.out.println(textoEmHexa);
+		System.out.println("TextoEncriptado");
+		System.out.println(textoEncriptado);
+		System.out.println("TextoDesencriptado");
+		System.out.println(textoDesencriptado);
+		System.out.println("Texto extraido");
+		System.out.println(texto2);		
+	}
+}

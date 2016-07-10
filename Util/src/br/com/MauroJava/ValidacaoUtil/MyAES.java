@@ -12,7 +12,7 @@ public class MyAES{
 	private IvParameterSpec ivps;
 	
 	public MyAES(String key, String iv){
-		byte[] ivArray = Conversoes.converteASCiiParaByteArray(iv, false);
+		byte[] ivArray = Converter.ASCiiParaByteArray(iv, false);
 		ivps = new IvParameterSpec(ivArray);
 		chaveAES = gerarChaveAES(key);
 	}
@@ -21,7 +21,7 @@ public class MyAES{
 	* java.security.Key
 	*/
 	public static Key gerarChaveAES(String key){
-		byte[] keyArray = Conversoes.converteHexStringParaByteArray(key);
+		byte[] keyArray = Converter.HexStringParaByteArray(key);
 		return new SecretKeySpec(keyArray,"AES");
 	}
 	/*
@@ -30,9 +30,9 @@ public class MyAES{
 	public String encriptar(String texto) throws Exception{
 		Cipher c = Cipher.getInstance(ALGORITMO);
 		c.init(Cipher.ENCRYPT_MODE, chaveAES, ivps);
-		byte[] textoArray = Conversoes.converteHexStringParaByteArray(texto);
+		byte[] textoArray = Converter.HexStringParaByteArray(texto);
 		byte[] msg = c.doFinal(textoArray);
-		return Conversoes.converteByteArrayParaHexString(msg);
+		return Converter.ByteArrayParaHexString(msg);
 	}
 	/*
 	* textoCifrado String em formato hexadecimal do texto encriptado
@@ -40,9 +40,9 @@ public class MyAES{
 	public String desencriptar(String textoCifrado) throws Exception{
 		Cipher c = Cipher.getInstance(ALGORITMO);
 		c.init(Cipher.DECRYPT_MODE, chaveAES, ivps);
-		byte[] textoArray = Conversoes.converteHexStringParaByteArray(textoCifrado);
+		byte[] textoArray = Converter.HexStringParaByteArray(textoCifrado);
 		byte[] msg = c.doFinal(textoArray);
-		return Conversoes.converteByteArrayParaHexString(msg);
+		return Converter.ByteArrayParaHexString(msg);
 	}
 }
 

@@ -29,7 +29,6 @@
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 <fullyQualifiedTypeName name="java.awt.Cursor"/>
 <fullyQualifiedTypeName name="dal.ModuloConexao"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
 <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
@@ -42,4 +41,6 @@
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.Conversoes"/>
 <fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.ValidacaoUtil"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
 </qualifiedTypeNameHistroy>

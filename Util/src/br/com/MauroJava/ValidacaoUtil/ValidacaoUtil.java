@@ -9,7 +9,6 @@ import java.time.format.FormatStyle;
 
 import java.util.Locale;
 import java.util.Properties;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -100,9 +99,9 @@ public abstract class ValidacaoUtil {
 				processo = Runtime.getRuntime().exec(COMANDO);
 				iStream = processo.getInputStream();
 				byte[] buf = new byte[1024];
-				int tamanho = 0;
+				int tamanho = iStream.read(buf);
 				StringBuffer sb = new StringBuffer();
-				while ((tamanho = iStream.read(buf)) >= 0) {
+				while (tamanho  >= 0) {
 					sb.append(new String(buf));
 				}
 				String ret = sb.toString();
@@ -135,9 +134,9 @@ public abstract class ValidacaoUtil {
 				processo = Runtime.getRuntime().exec(COMANDO);
 				iStream = processo.getInputStream();
 				byte[] buf = new byte[1024];
-				int tamanho = 0;
+				int tamanho = iStream.read(buf);
 				StringBuffer sb = new StringBuffer();
-				while ((tamanho = iStream.read(buf)) >= 0) {
+				while (tamanho >= 0) {
 					sb.append(new String(buf));
 				}
 				String volume = sb.toString().substring(73, 88);

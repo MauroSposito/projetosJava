@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
 
-import br.com.MauroJava.ValidacaoUtil.Conversoes;
+import br.com.MauroJava.ValidacaoUtil.Converter;
 import br.com.MauroJava.ValidacaoUtil.MyAES;
 
 
@@ -25,12 +25,12 @@ public class ModuloConexao {
 		java.sql.Connection conexao = null;
 		
 		//armazena em variavel para "chamar" o driver importado para biblioteca.
-		String driver = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("driver")));
+		String driver = Converter.HexStringParaString(aes.desencriptar(arqIni.getProperty("driver")));
 		
 		//armazenando informaçoes referente ao banco de dados.
-		String url = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("url")));
-		String user = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("user")));
-		String password = Conversoes.converteHexStringParaString(aes.desencriptar(arqIni.getProperty("password")));
+		String url = Converter.HexStringParaString(aes.desencriptar(arqIni.getProperty("url")));
+		String user = Converter.HexStringParaString(aes.desencriptar(arqIni.getProperty("user")));
+		String password = Converter.HexStringParaString(aes.desencriptar(arqIni.getProperty("password")));
 		
 		//estabelecendo a conexao com o banco de dados.
 		try {

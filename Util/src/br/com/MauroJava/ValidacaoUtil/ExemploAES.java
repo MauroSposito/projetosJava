@@ -1,5 +1,7 @@
 package br.com.MauroJava.ValidacaoUtil;
 
+
+
 public class ExemploAES{
 
 	public static void main (String[] args) throws Exception{
@@ -17,13 +19,14 @@ public class ExemploAES{
 		/*
 		 * Texto a ser criptografado
 		 */
-		String texto = ValidacaoUtil.idMaquina();
+		String texto = "texto a ser criptografado";
+		
 		
 		/*
 		 * Converte o texto em ByteArray e depois
 		 * converte o ByteArray em HexString 
 		 */
-		String textoEmHexa = Conversoes.converteByteArrayParaHexString(Conversoes.converteASCiiParaByteArray(texto, true));
+		String textoEmHexa = Converter.ByteArrayParaHexString(Converter.ASCiiParaByteArray(texto, true));
 		
 		/*
 		 * Instacia o objeto do tipo MyAES passando como
@@ -44,7 +47,7 @@ public class ExemploAES{
 		/*
 		 * converte o HexString em String legivel 
 		 */
-		String texto2 = Conversoes.converteHexStringParaString(textoDesencriptado);
+		String texto2 = Converter.HexStringParaString(textoDesencriptado);
 		
 		/*
 		 * para conferencia
