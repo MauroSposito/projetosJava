@@ -42,7 +42,7 @@ public class ExemploAES{
 		/*
 		 * uma variavel recebe o texto desencriptado
 		 */
-		String textoDesencriptado = aes.desencriptar(textoEncriptado);
+		String textoDesencriptado = aes.desencriptar("774AE710E0A24C102DEE38D0FD923CED22F7BD446C503C1DCBB9091A499D4E3D2797A0F8A7C7F0E38D8C22EFE287236AF9D7257760D6");
 		
 		/*
 		 * converte o HexString em String legivel 

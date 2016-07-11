@@ -3,6 +3,7 @@ package telas;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -133,6 +134,33 @@ public class TelaLogin extends JFrame {
 		
 		//PasswordField
 		pwfSenha = new JPasswordField();
+		pwfSenha.setBounds(150, 62, 180, 20);
+		contentPane.add(pwfSenha);
+		
+		//Button
+		btnSair = new JButton("Sair");
+		btnSair.setBounds(150, 93, 89, 23);
+		btnSair.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		btnLogin = new JButton("Login");
+		btnLogin.setBounds(241, 93, 89, 23);
+		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		contentPane.add(btnSair);
+		contentPane.add(btnLogin);
+		
+		/*
+		 * Ordem do <TAB> no frame
+		 */
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txfUsuario, pwfSenha, btnSair, btnLogin}));
+		
+		/*
+		 * Eventos
+		 */
+		
+		/*
+		 * Tecla <ENTER> no campo senha
+		 */
 		pwfSenha.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -142,18 +170,6 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		pwfSenha.setBounds(150, 62, 180, 20);
-		contentPane.add(pwfSenha);
-		
-		//Button
-		btnSair = new JButton("Sair");
-		btnSair.setBounds(150, 93, 89, 23);
-		btnLogin = new JButton("Login");
-		btnLogin.setBounds(241, 93, 89, 23);
-		contentPane.add(btnSair);
-		contentPane.add(btnLogin);
-		
-		//Button Actions
 		/*
 		 * Button Sair Action <ENTER>	
 		 */	
@@ -195,12 +211,7 @@ public class TelaLogin extends JFrame {
 				logar();
 			}
 		});
-		/*
-		 * Ordem do <TAB> no frame
-		 */
-		
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txfUsuario, pwfSenha, btnSair, btnLogin}));
-		
+				
 		/*
 		 * Conecta bando de dados e exibe Icone conectado ou nao conectado na label Status
 		 */
@@ -215,7 +226,7 @@ public class TelaLogin extends JFrame {
 	/**
 	 * Cria metodo para logar.
 	 */
-	@SuppressWarnings("deprecation")// para tirar o alerta foi criado automatico
+	@SuppressWarnings("deprecation")
 	public void logar(){
 		String sql = "select * from tbusuarios where login=? and senha=?";
 		try {

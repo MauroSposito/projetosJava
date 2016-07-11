@@ -16,7 +16,7 @@ public class ModuloConexao {
 		String driver = "com.mysql.jdbc.Driver";
 		
 		//armazenando informaçoes referente ao banco de dados.
-		String url = "jdbc:mysql://localhost:3306/dbprincipal";
+		String url = "jdbc:mysql://localhost:3306/dbprincipal?useSSL=true";
 		String user = "root";
 		String password = "mshigh001";
 		

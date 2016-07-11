@@ -27,7 +27,6 @@
 <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
-<fullyQualifiedTypeName name="java.awt.Cursor"/>
 <fullyQualifiedTypeName name="dal.ModuloConexao"/>
 <fullyQualifiedTypeName name="javafx.scene.paint.Color"/>
 <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
@@ -43,4 +42,5 @@
 <fullyQualifiedTypeName name="br.com.MauroJava.ValidacaoUtil.ValidacaoUtil"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="java.awt.Cursor"/>
 </qualifiedTypeNameHistroy>

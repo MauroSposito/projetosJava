@@ -46,20 +46,11 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 	private JButton btnDelete;
 
 	Connection conexao = null;// conecta o banco de dados
-	PreparedStatement pst = null;// framework sql. prepara a conexao com banco
-									// de dados
-	ResultSet rs = null;// para exibir o resultado das instrucoes sql dentro do
-						// java
+	PreparedStatement pst = null;// framework sql. prepara a conexao com banco de dados
+	ResultSet rs = null;// para exibir o resultado das instrucoes sql dentro do java
 
-	/**
-	 * Launch the application.
-	 * 
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { TelaCadastroUsuarios frame = new
-	 * TelaCadastroUsuarios(); frame.setVisible(true); } catch (Exception e) {
-	 * e.printStackTrace(); } } }); }
-	 * 
-	 * /** Create the frame.
+	/*
+	 *  Create the frame.
 	 */
 
 	public TelaCadastroUsuarios() {
@@ -83,20 +74,6 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		getContentPane().add(lblIdUser);
 
 		txfIdUser = new JTextField();
-		txfIdUser.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int key = (e.getKeyCode());
-				if (key == 10) {
-					try {
-						consultar();
-					} catch (Exception e1) {
-						
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
 		txfIdUser.setBounds(156, 68, 65, 20);
 		getContentPane().add(txfIdUser);
 
@@ -142,22 +119,15 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 
 		cbbNivel = new JComboBox<Integer>();
 		cbbNivel.setBounds(465, 248, 40, 20);
+		cbbNivel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cbbNivel.addItem(0);
 		cbbNivel.addItem(1);
 		getContentPane().add(cbbNivel);
-
+		
+		/*
+		 * Botoes
+		 */
 		btnCreate = new JButton();
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					adicionar();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-			}
-		});
-
 		btnCreate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCreate.setToolTipText("Adicionar");
 		btnCreate.setPreferredSize(new Dimension(80, 80));
@@ -166,18 +136,6 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		getContentPane().add(btnCreate);
 
 		btnRead = new JButton();
-		btnRead.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					consultar();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-
-			}
-		});
-
 		btnRead.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRead.setToolTipText("Procurar");
 		btnRead.setPreferredSize(new Dimension(80, 80));
@@ -186,18 +144,6 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		getContentPane().add(btnRead);
 
 		btnUpdate = new JButton();
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					alterar();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-
-			}
-		});
-
 		btnUpdate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUpdate.setToolTipText("Alterar");
 		btnUpdate.setPreferredSize(new Dimension(80, 80));
@@ -206,31 +152,73 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 		getContentPane().add(btnUpdate);
 
 		btnDelete = new JButton();
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					consultar();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				try {
-					remover();
-				} catch (Exception e) {
-					
-					e.printStackTrace();
-				}
-
-			}
-		});
-		
 		btnDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDelete.setToolTipText("Apagar");
 		btnDelete.setPreferredSize(new Dimension(80, 80));
 		btnDelete.setBounds(580, 350, 80, 80);
 		btnDelete.setIcon(new ImageIcon(TelaCadastroUsuarios.class.getResource("/icones/delete.png")));
 		getContentPane().add(btnDelete);
-
+		
+		/*
+		 * Eventos
+		 */
+		txfIdUser.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				int key = (e.getKeyCode());
+				if (key == 10) {
+					try {
+						consultar();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					adicionar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnRead.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					consultar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					alterar();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					consultar();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				try {
+					remover();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/*
@@ -267,6 +255,8 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 				}
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e);
+			} finally{
+				conexao.close();
 			}
 		}
 	}
@@ -324,23 +314,26 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 								txfSenha.setText(null);
 								txfFone.setText(null);
 								conexao.close();
-
 							}
 						}
 
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, e);
+					}finally{
+						conexao.close();
 					}
-
 				}
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e);
+			}finally{
+				conexao.close();
 			}
-
 		}
-
 	}
 
+	/*
+	 * metodo para alterar usuarios.
+	 */
 	private void alterar() throws Exception {
 		// estabelece a conexao com banco de dados
 		conexao = ModuloConexao.conector();
@@ -399,10 +392,15 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 				}
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, e);
+			}finally{
+				conexao.close();
 			}
 		}
 	}
-	
+
+	/*
+	 * metodo para deletar usuarios.
+	 */
 	private void remover() throws Exception{
 		if (txfIdUser.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira Código");
@@ -435,6 +433,8 @@ public class TelaCadastroUsuarios extends JInternalFrame {
 					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e);
+				}finally{
+					conexao.close();
 				}
 			}
 		}
